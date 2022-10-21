@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food/place_order.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,29 +10,38 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text("iLundary"),
-        ),
-        drawer: const Drawer(),
-        body: Column(children: const [
-          SizedBox(height: 20.5),
-          Center(
-            child: Text(
-              "My Lundary Data",
-              style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.blue),
-            ),
-          ),
-          MyOrder(),
-          StatData(),
-          CustomStack(),
-        ]),
+    return const MaterialApp(
+      home: MyHome(),
+    );
+  }
+}
+
+class MyHome extends StatelessWidget {
+  const MyHome({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Place Order"),
       ),
+      drawer: const Drawer(),
+      body: Column(children: const [
+        SizedBox(height: 20.5),
+        Center(
+          child: Text(
+            "My Lundary Data",
+            style: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.w800,
+                color: Colors.blue),
+          ),
+        ),
+        MyOrder(),
+        StatData(),
+        CustomStack(),
+      ]),
     );
   }
 }
@@ -108,11 +118,16 @@ class CustomStack extends StatelessWidget {
           color: Colors.lightBlueAccent,
           child: Column(
             children: [
-              Container(
-                width: double.infinity,
-                color: Colors.orange,
-                padding: const EdgeInsets.all(20),
-                child: const Center(child: Text("Place Order")),
+              GestureDetector(
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const PlaceOrder(),
+                )),
+                child: Container(
+                  width: double.infinity,
+                  color: Colors.orange,
+                  padding: const EdgeInsets.all(20),
+                  child: const Center(child: Text("Place Order")),
+                ),
               ),
               const SizedBox(height: 20.0),
               Container(
